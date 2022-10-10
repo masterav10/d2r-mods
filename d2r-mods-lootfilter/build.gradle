@@ -1,0 +1,4 @@
+dependencies {
+    api "org.bytedeco:casc-lib:${cascLibVersion}"
+    implementation "org.bytedeco:casc-lib:${cascLibVersion}:$javacppPlatform"
+}

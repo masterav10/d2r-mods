@@ -1,0 +1,43 @@
+ext {
+	javacppVersion = "1.5.7"
+	javacppPlatform = "windows-x86_64"
+	cascLibVersion = "2.1-${javacppVersion}"
+}
+
+version "1.4.71510"
+
+allprojects {
+	group = 'org.bytedeco.presets'
+	
+	apply plugin: "eclipse"
+	apply plugin: "java-library"
+	
+	sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+}
+
+subprojects {
+   	apply plugin: "java-test-fixtures"
+
+	repositories {
+	    mavenLocal()
+	    mavenCentral()
+	    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+	}
+	
+	dependencies {		
+		api platform("org.springframework.boot:spring-boot-dependencies:2.5.0")
+
+		testFixturesApi 'org.springframework:spring-core'
+		testFixturesApi "org.slf4j:slf4j-simple"	
+		testFixturesApi 'org.junit.jupiter:junit-jupiter'
+		testFixturesApi 'org.assertj:assertj-core'
+		testFixturesApi 'org.mockito:mockito-core'
+	}
+	
+	test {
+		useJUnitPlatform()
+		testLogging {
+			events "passed", "skipped", "failed"
+		}
+	}
+}
