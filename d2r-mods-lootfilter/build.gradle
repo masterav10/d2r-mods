@@ -1,4 +1,13 @@
+plugins {
+	id 'org.inferred.processors' version '3.7.0'
+}
+
 dependencies {
-    api "org.bytedeco.presets:casc-lib:${cascLibVersion}"
-    implementation "org.bytedeco.presets:casc-lib:${cascLibVersion}:$javacppPlatform"
+    annotationProcessor "org.inferred:freebuilder:${freebuilderVersion}"
+  	implementation  "org.inferred:freebuilder:${freebuilderVersion}"
+    
+    api "org.bytedeco.presets:immersed-presets-casclib:${cascLibVersion}"
+    implementation "org.bytedeco.presets:immersed-presets-casclib:${cascLibVersion}:$javacppPlatform"
+    
+    implementation("com.google.guava:guava:31.1-jre")
 }
