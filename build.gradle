@@ -1,4 +1,5 @@
 ext {
+    freebuilderVersion = "2.8.0"
 	javacppVersion = "1.5.7"
 	javacppPlatform = "windows-x86_64"
 	cascLibVersion = "2.1-${javacppVersion}"
@@ -26,6 +27,8 @@ subprojects {
 	
 	dependencies {		
 		api platform("org.springframework.boot:spring-boot-dependencies:2.5.0")
+		
+		implementation 'org.springframework.boot:spring-boot-starter'
 
 		testFixturesApi 'org.springframework:spring-core'
 		testFixturesApi "org.slf4j:slf4j-simple"	
