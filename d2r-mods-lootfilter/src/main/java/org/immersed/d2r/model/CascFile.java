@@ -11,11 +11,31 @@ import org.bytedeco.javacpp.PointerPointer;
 import org.bytedeco.systems.windows.HANDLE;
 import org.inferred.freebuilder.FreeBuilder;
 
+import com.google.common.base.Preconditions;
+
+/**
+ * Represents a file stored within a Casc Database.
+ * 
+ * @author Dan Avila
+ */
 @FreeBuilder
 public interface CascFile
 {
+    /**
+     * Builds a file from the Casc Database
+     * 
+     * @author Dan Avila
+     *
+     */
     class Builder extends CascFile_Builder
     {
+        /**
+         * Populates all fields of this builder from the data provided from a file found
+         * in casc storage.
+         * 
+         * @param pFindData the data from the casc database.
+         * @return this.
+         */
         public Builder mergeFromCasc(CASC_FIND_DATA pFindData)
         {
             super.name(pFindData.szFileName()
@@ -23,8 +43,7 @@ public interface CascFile
             super.isPresent(pFindData.bFileAvailable() != 0);
 
             super.size(pFindData.FileSize());
-            super.span(pFindData.dwSpanCount());
-            
+
             return this;
         }
     }
@@ -37,14 +56,30 @@ public interface CascFile
      */
     String name();
 
+    /**
+     * Check to see if the file is available.
+     * 
+     * @return true if the file is on the local disk, false otherwise.
+     */
     boolean isPresent();
 
+    /**
+     * The size of the file.
+     * 
+     * @return size in bytes
+     */
     long size();
-    
-    int span();
-    
+
+    /**
+     * Returns the contents of a file stored within a CascDatabase.
+     * 
+     * @param database the file available.
+     * @return the text of the file as a string.
+     */
     default String getFileContents(CascDatabase database)
     {
+        Preconditions.checkState(isPresent());
+
         final HANDLE hStorage = database.hStorage();
 
         try (PointerPointer<HANDLE> hFilePtr = new PointerPointer<>(1L))
@@ -63,7 +98,7 @@ public interface CascFile
             check(CascReadFile(hFile, lpBuffer, dwToRead, pdwRead));
 
             check(CascCloseFile(hFile));
-            
+
             return lpBuffer.getString();
         }
     }
