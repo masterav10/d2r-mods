@@ -9,5 +9,7 @@ dependencies {
     api "org.bytedeco.presets:immersed-presets-casclib:${cascLibVersion}"
     implementation "org.bytedeco.presets:immersed-presets-casclib:${cascLibVersion}:$javacppPlatform"
     
+    api "com.fasterxml.jackson.core:jackson-databind"
+    
     implementation("com.google.guava:guava:31.1-jre")
 }
