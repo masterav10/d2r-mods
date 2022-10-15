@@ -1,6 +1,6 @@
 package org.immersed.d2r.model;
 
-import org.bytedeco.systems.global.windows;
+import org.bytedeco.casclib.global.casclib;
 
 public class CascUtil
 {
@@ -8,7 +8,7 @@ public class CascUtil
     {
         if (!success)
         {
-            throw new IllegalStateException(String.format("%d", windows.GetLastError()));
+            throw new IllegalStateException(String.format("%d", casclib.GetCascError()));
         }
     }
 

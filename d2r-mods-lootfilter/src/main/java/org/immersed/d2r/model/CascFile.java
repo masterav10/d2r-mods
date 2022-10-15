@@ -73,10 +73,22 @@ public interface CascFile
     /**
      * Returns the contents of a file stored within a CascDatabase.
      * 
-     * @param database the file available.
+     * @param database the database holding the file.
      * @return the text of the file as a string.
      */
     default String getFileContents(CascDatabase database)
+    {
+        return new String(getFileBytes(database));
+    }
+
+    /**
+     * Returns the contents of a file stored within a CascDatabase.
+     * 
+     * @param database the data base holding the file
+     * @return the bytes of the file.
+     * @see #getFileContents(CascDatabase)
+     */
+    default byte[] getFileBytes(CascDatabase database)
     {
         Preconditions.checkState(isPresent());
 
@@ -85,7 +97,7 @@ public interface CascFile
         try (PointerPointer<HANDLE> hFilePtr = new PointerPointer<>(1L))
         {
             final String name = name();
-            final Pointer szFileName = new BytePointer(name.getBytes());
+            final Pointer szFileName = new BytePointer(name);
             final int dwLocalFlags = 0;
             final int dwOpenFlags = CASC_OPEN_BY_NAME;
             check(CascOpenFile(hStorage, szFileName, dwLocalFlags, dwOpenFlags, hFilePtr));
@@ -99,7 +111,7 @@ public interface CascFile
 
             check(CascCloseFile(hFile));
 
-            return lpBuffer.getString();
+            return lpBuffer.getStringBytes();
         }
     }
 }
