@@ -41,7 +41,7 @@ public class D2RExportAll
                 final Path root = Files.createDirectories(settings.extraction());
 
                 Set<String> includeExts = new HashSet<>(Arrays.asList(".json", ".template", ".mht", ".txt", ".template",
-                        ".frontend", ".params", ".dat"));
+                        ".frontend", ".params", ".dat", ".particles"));
 
                 for (CascFile file : database.getFiles())
                 {
@@ -52,7 +52,7 @@ public class D2RExportAll
 
                     int index = name.lastIndexOf('.');
 
-                    if (index >= 0)
+                    if (index >= 0 && !Files.exists(extractedLocation))
                     {
                         String ext = name.substring(name.lastIndexOf('.'), name.length());
 
