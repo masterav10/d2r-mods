@@ -31,7 +31,6 @@ subprojects {
 		implementation 'org.springframework.boot:spring-boot-starter'
 
 		testFixturesApi 'org.springframework:spring-core'
-		testFixturesApi "org.slf4j:slf4j-simple"	
 		testFixturesApi 'org.junit.jupiter:junit-jupiter'
 		testFixturesApi 'org.assertj:assertj-core'
 		testFixturesApi 'org.mockito:mockito-core'
