@@ -5,10 +5,8 @@ import static org.immersed.d2r.model.CascUtil.*;
 
 import java.io.Closeable;
 import java.io.File;
-import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 import org.bytedeco.casclib.CASC_FIND_DATA;
@@ -33,6 +31,11 @@ public class CascDatabase implements Closeable
 
     private final HANDLE hStorage;
     private final List<CascFile> files;
+
+    public CascDatabase(CascSettings settings)
+    {
+        this(settings.installation());
+    }
 
     public CascDatabase(Path root)
     {
@@ -83,7 +86,7 @@ public class CascDatabase implements Closeable
         final SizeTPointer pcbLengthNeeded = new SizeTPointer(1L);
 
         check(CascGetStorageInfo(hStorage, InfoClass, pvStorageInfo, cbStorageInfo, pcbLengthNeeded));
-        
+
         check(CascGetStorageInfo(hStorage, InfoClass, pvStorageInfo, cbStorageInfo, pcbLengthNeeded));
 
         int value = pvStorageInfo.get();
@@ -95,7 +98,7 @@ public class CascDatabase implements Closeable
             if (name.contains("_FEATURE_"))
             {
                 int bitField = (int) f.get(null);
-                
+
                 if ((value & bitField) != 0)
                 {
                     LOG.info("  {}", name);

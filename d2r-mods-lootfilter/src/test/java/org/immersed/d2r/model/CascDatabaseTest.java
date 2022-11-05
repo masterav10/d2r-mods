@@ -2,9 +2,7 @@ package org.immersed.d2r.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import org.immersed.d2r.apps.D2RConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +19,8 @@ class CascDatabaseTest
     @BeforeEach
     public void loadDatabase()
     {
-        final Path root = Paths.get("C:", "Program Files (x86)", "Diablo II Resurrected", "Data");
-        this.database = new CascDatabase(root);
+        D2RConfig config = new D2RConfig();
+        this.database = new CascDatabase(config.settings());
     }
 
     @AfterEach
