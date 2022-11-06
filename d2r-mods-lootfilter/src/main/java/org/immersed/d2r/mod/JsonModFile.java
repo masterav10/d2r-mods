@@ -3,18 +3,17 @@ package org.immersed.d2r.mod;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
+import java.util.function.Consumer;
 
 import org.immersed.d2r.model.CascDatabase;
 import org.immersed.d2r.model.CascFile;
 import org.immersed.d2r.model.CascSettings;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 /**
- * Represents a json file.
+ * Represents a JSON file stored within this model.
  * 
  * @author Dan Avila
  */
@@ -22,7 +21,7 @@ public class JsonModFile implements ModFile
 {
     private final Mod mod;
     private final CascFile item;
-    private final JsonNode node;
+    private final Object node;
 
     public JsonModFile(Mod mod, CascFile item) throws IOException
     {
@@ -34,7 +33,12 @@ public class JsonModFile implements ModFile
         ObjectReader reader = settings.reader();
 
         byte[] data = item.getFileBytes(database);
-        this.node = reader.readTree(data);
+        this.node = reader.readValue(data, Object.class);
+    }
+
+    public void updateJson(Consumer<Object> type)
+    {
+        type.accept(this.node);
     }
 
     @Override
