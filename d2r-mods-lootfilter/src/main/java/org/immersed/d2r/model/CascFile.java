@@ -71,6 +71,16 @@ public interface CascFile
     long size();
 
     /**
+     * The relative path of this file.
+     * 
+     * @return the path.
+     */
+    default String relativePath()
+    {
+        return name().replace("data:", "");
+    }
+
+    /**
      * Returns the contents of a file stored within a CascDatabase.
      * 
      * @param database the database holding the file.

@@ -25,7 +25,7 @@ public class D2RConfig
      * @return the settings object.
      */
     @Bean
-    public CascSettings settings()
+    public CascSettings settings(ObjectMapper objectMapper)
     {
         final Path home = Paths.get("C:", "Program Files (x86)", "Diablo II Resurrected");
         final Path install = home.resolve("Data");
@@ -35,13 +35,14 @@ public class D2RConfig
         return new CascSettings.Builder().installation(install)
                                          .extraction(settings)
                                          .mods(mods)
+                                         .mapper(objectMapper)
                                          .build();
     }
 
     /**
      * Json object mapper, to be used for reading and writing files.
      * 
-     * @return
+     * @return the mapper bean.
      */
     @Bean
     public ObjectMapper objectMapper()

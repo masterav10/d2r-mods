@@ -4,6 +4,10 @@ import java.nio.file.Path;
 
 import org.inferred.freebuilder.FreeBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 /**
  * Settings to be used throughout the plugins.
  * 
@@ -43,4 +47,21 @@ public interface CascSettings
      * @return the path.
      */
     Path mods();
+
+    /**
+     * Used for reading and writing json.
+     * 
+     * @return object for json stuff.
+     */
+    ObjectMapper mapper();
+
+    default ObjectReader reader()
+    {
+        return mapper().reader();
+    }
+
+    default ObjectWriter writer()
+    {
+        return mapper().writerWithDefaultPrettyPrinter();
+    }
 }

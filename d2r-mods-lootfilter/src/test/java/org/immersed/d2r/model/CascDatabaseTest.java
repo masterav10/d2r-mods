@@ -20,7 +20,7 @@ class CascDatabaseTest
     public void loadDatabase()
     {
         D2RConfig config = new D2RConfig();
-        this.database = new CascDatabase(config.settings());
+        this.database = new CascDatabase(config.settings(config.objectMapper()));
     }
 
     @AfterEach
