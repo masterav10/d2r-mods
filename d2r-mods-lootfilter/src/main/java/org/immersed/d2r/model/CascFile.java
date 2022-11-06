@@ -77,7 +77,7 @@ public interface CascFile
      */
     default String relativePath()
     {
-        return name().replace("data:", "");
+        return name().replace("data:data\\", "");
     }
 
     /**
