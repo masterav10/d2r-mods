@@ -9,6 +9,7 @@ import org.immersed.d2r.model.CascDatabase;
 import org.immersed.d2r.model.CascFile;
 import org.immersed.d2r.model.CascSettings;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -21,7 +22,7 @@ public class JsonModFile implements ModFile
 {
     private final Mod mod;
     private final CascFile item;
-    private final Map<String, Object> map;
+    private final JsonNode node;
 
     public JsonModFile(Mod mod, CascFile item) throws IOException
     {
@@ -33,22 +34,21 @@ public class JsonModFile implements ModFile
         ObjectReader reader = settings.reader();
 
         byte[] data = item.getFileBytes(database);
-        this.map = reader.readValue(data);
+        this.node = reader.readTree(data);
     }
 
     @Override
-    public void save()
+    public void save(Path dataRoot)
     {
         CascSettings settings = mod.settings();
         ObjectWriter writer = settings.writer();
 
-        Path modFile = settings.mods()
-                               .resolve(item.relativePath());
+        Path modFile = dataRoot.resolve(item.relativePath());
 
         try
         {
             Files.createDirectories(modFile.getParent());
-            writer.writeValue(modFile.toFile(), this.map);
+            writer.writeValue(modFile.toFile(), this.node);
         }
         catch (IOException e)
         {

@@ -45,11 +45,11 @@ public class ModWriter
         Path data = modRoot.resolve("modinfo.json");
         objectMapper.writeValue(data.toFile(), values);
 
-        Files.createDirectories(modRoot.resolve("Data"));
+        Path dataRoot = Files.createDirectories(modRoot.resolve("Data"));
 
         for (ModFile modfile : items)
         {
-            modfile.save();
+            modfile.save(dataRoot);
         }
     }
 }
