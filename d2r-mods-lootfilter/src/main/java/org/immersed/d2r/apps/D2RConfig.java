@@ -3,6 +3,7 @@ package org.immersed.d2r.apps;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.immersed.d2r.model.CascDatabase;
 import org.immersed.d2r.model.CascSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,12 @@ public class D2RConfig
                                          .mods(mods)
                                          .mapper(objectMapper)
                                          .build();
+    }
+
+    @Bean(destroyMethod = "close")
+    public CascDatabase database(CascSettings settings)
+    {
+        return new CascDatabase(settings);
     }
 
     /**
