@@ -8,6 +8,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bytedeco.casclib.CASC_FIND_DATA;
 import org.bytedeco.casclib.global.casclib;
@@ -116,6 +117,25 @@ public class CascDatabase implements Closeable
     public List<CascFile> getFiles()
     {
         return this.files;
+    }
+
+    public CascFile getFileByName(String name)
+    {
+        return getFiles().stream()
+                         .filter(file -> name.equals(file.fileName()))
+                         .findFirst()
+                         .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public List<CascFile> getFileByPath(String path)
+    {
+        return getFiles().stream()
+                         .filter(file ->
+                         {
+                             String parent = file.fileName();
+                             return path.equals(parent);
+                         })
+                         .collect(Collectors.toList());
     }
 
     @Override

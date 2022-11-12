@@ -33,8 +33,8 @@ public interface CascFile
          * Populates all fields of this builder from the data provided from a file found
          * in casc storage.
          * 
-         * @param pFindData the data from the casc database.
-         * @return this.
+         * @param  pFindData the data from the casc database.
+         * @return           this.
          */
         public Builder mergeFromCasc(CASC_FIND_DATA pFindData)
         {
@@ -49,10 +49,28 @@ public interface CascFile
     }
 
     /**
+     * Returns the name of the file, removing the relative file path.
+     * 
+     * @return the name of the file, no paths included.
+     */
+    default String fileName()
+    {
+        String name = name();
+        int slash = name.lastIndexOf('\\') + 1;
+
+        if (slash >= 0)
+        {
+            return name.substring(slash);
+        }
+
+        return name;
+    }
+
+    /**
      * The name of the file within storage.
      * 
      * @return the name of the file within the database.
-     * @see CASC_FIND_DATA#szFileName()
+     * @see    CASC_FIND_DATA#szFileName()
      */
     String name();
 
@@ -83,8 +101,8 @@ public interface CascFile
     /**
      * Returns the contents of a file stored within a CascDatabase.
      * 
-     * @param database the database holding the file.
-     * @return the text of the file as a string.
+     * @param  database the database holding the file.
+     * @return          the text of the file as a string.
      */
     default String getFileContents(CascDatabase database)
     {
@@ -94,9 +112,9 @@ public interface CascFile
     /**
      * Returns the contents of a file stored within a CascDatabase.
      * 
-     * @param database the data base holding the file
-     * @return the bytes of the file.
-     * @see #getFileContents(CascDatabase)
+     * @param  database the data base holding the file
+     * @return          the bytes of the file.
+     * @see             #getFileContents(CascDatabase)
      */
     default byte[] getFileBytes(CascDatabase database)
     {
