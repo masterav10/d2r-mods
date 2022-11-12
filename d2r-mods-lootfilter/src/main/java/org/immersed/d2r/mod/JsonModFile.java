@@ -3,6 +3,8 @@ package org.immersed.d2r.mod;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import org.immersed.d2r.model.CascDatabase;
@@ -39,6 +41,21 @@ public class JsonModFile implements ModFile
     public void updateJson(Consumer<Object> type)
     {
         type.accept(this.node);
+    }
+
+    public void updateJsonStrings(Consumer<Map<String, Object>> consumer)
+    {
+        updateJson(listObj ->
+        {
+            List<?> list = (List<?>) listObj;
+
+            for (Object mapObj : list)
+            {
+                Map<String, Object> map = (Map<String, Object>) mapObj;
+                consumer.accept(map);
+            }
+        });
+
     }
 
     @Override
