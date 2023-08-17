@@ -1,6 +1,6 @@
 ext {
     freebuilderVersion = "2.8.0"
-	javacppVersion = "1.5.7"
+	javacppVersion = "1.5.9"
 	javacppPlatform = "windows-x86_64"
 	cascLibVersion = "2.1-${javacppVersion}"
 }

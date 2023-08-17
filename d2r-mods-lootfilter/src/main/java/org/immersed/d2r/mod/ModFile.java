@@ -1,5 +1,6 @@
 package org.immersed.d2r.mod;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 /**
@@ -16,5 +17,5 @@ public interface ModFile
      * 
      * @param root
      */
-    void save(Path root);
+    void save(Path root) throws IOException;
 }

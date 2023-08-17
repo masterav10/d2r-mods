@@ -34,7 +34,6 @@ public class ModWriter
         final String modName = mod.name();
 
         Path mods = settings.mods();
-
         Path modRoot = Files.createDirectories(mods.resolve(modName)
                                                    .resolve(modName + ".mpq"));
 

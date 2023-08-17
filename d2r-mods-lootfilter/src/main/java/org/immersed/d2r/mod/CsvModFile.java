@@ -1,10 +1,11 @@
 package org.immersed.d2r.mod;
 
+import static java.nio.file.StandardOpenOption.*;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,27 +88,22 @@ public class CsvModFile implements ModFile
     }
 
     @Override
-    public void save(Path dataRoot)
+    public void save(Path dataRoot) throws IOException
     {
         Path modFile = dataRoot.resolve(item.relativePath());
+        Files.createDirectories(modFile.getParent());
 
-        try (BufferedWriter writer = Files.newBufferedWriter(modFile, StandardOpenOption.CREATE,
-                StandardOpenOption.WRITE))
+        try (BufferedWriter writer = Files.newBufferedWriter(modFile, CREATE, WRITE))
         {
             for (String[] row : this.rows)
             {
                 String rowText = Arrays.stream(row)
-                                       .reduce((s1, s2) -> s1 + "\\t" + s2)
+                                       .reduce((s1, s2) -> s1 + "\t" + s2)
                                        .orElse("");
 
                 writer.write(rowText);
                 writer.newLine();
             }
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
     }
-
 }
