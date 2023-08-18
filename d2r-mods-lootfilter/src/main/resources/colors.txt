@@ -1,43 +1,39 @@
-ÿc0 white1
-ÿc= white2
-ÿc5 gray1
-ÿcK gray2
-ÿcI gray3
-ÿc6 black1
-ÿcM black2
+https://d2mods.info/forum/viewtopic.php?t=67420
 
-ÿcE lightred
-ÿc1 red1
-ÿcU red2
-ÿcS darkred
-
-ÿc@ orange1
-ÿc8 orange2
-ÿcJ orange3
-ÿcL orange4
-
-ÿc7 lightgold1
-ÿcH lightgold2
-ÿc4 gold1
-ÿcD gold2
-
-ÿc9 yellow1
-ÿcR yellow2
-
-ÿc2 green1
-ÿcQ green2
-ÿcC green3
-ÿc< green4
-ÿcA darkgreen1
-ÿc: darkgreen2
-
-ÿcN turquoise
-ÿcT skyblue
-ÿcF lightblue1
-ÿcP lightblue2
-ÿc3 blue1
-ÿcB blue2
-
-ÿcG lightpink
+ÿc0 — SPRITE_COLOR_NORMAL / FONTCOLOR_WHITE
+ÿc1 — SPRITE_COLOR_RED (pale red), ÿcS — dark red, ÿcU — rich red.
+ÿc2 — SPRITE_COLOR_GREEN
+ÿcQ — light green
+ÿc< — SPRITE_COLOR_NEWCHAR, ÿc: — SPRITE_COLOR_DARKGREEN.
+ÿc3 — SPRITE_COLOR_BLUE
+ÿcT — sky-blue
+ÿcP — pale violet
+ÿcN — light blue
+ÿc4 — SPRITE_COLOR_PANEL / FONTCOLOR_GOLD
+ÿc7 — SPRITE_COLOR_BNETGOLD
+ÿcM — light gold.
+ÿc5 — SPRITE_COLOR_GREY
+ÿc6 — SPRITE_COLOR_BLACK
+ÿc8 — SPRITE_COLOR_ORANGE
+ÿc9 — SPRITE_COLOR_YELLOW
+ÿcR — yellow
+ÿc; — SPRITE_COLOR_PURPLE
 ÿcO pink
-ÿc; purple
+
+
+ÿc= = DefaultColor by default $FontColorWhite
+ÿcE = HealthPotionColor by default $FontColorWhite
+ÿcF = ManaPotionColor by default $FontColorWhite
+ÿcG = RejuvPotionColor by default $FontColorWhite
+ÿcH = GoldColor by default $FontColorWhite
+ÿcC = SetColor by default $FontColorGreen
+ÿcA = TemperedColor by default $FontColorDarkGreen
+ÿcB = MagicColor by default $FontColorBlue
+ÿc> = QuestColor by default $FontColorGoldYellow
+ÿcD = UniqueColor by default $FontColorGoldYellow
+ÿcK = SocketedColor by default $FontColorGrey
+ÿcI = EtherealColor by default $FontColor Grey
+ÿcL = EventItemsColor by default $FontColorOrange
+ÿcJ = RuneColor by default $FontColorOrange
+ÿc@ = CraftedColor by default $FontColorOrange
+ÿc? = RareColor by default $FontColorYellow
