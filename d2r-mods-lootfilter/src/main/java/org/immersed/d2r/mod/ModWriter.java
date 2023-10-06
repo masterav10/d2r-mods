@@ -25,6 +25,24 @@ public class ModWriter
         this.modSettings = settings;
     }
 
+    public void writeDirect(Collection<ModFile> items) throws IOException
+    {
+        Path path = modSettings.settings()
+                               .installation();
+
+        write(items, path);
+    }
+
+    private void write(Collection<ModFile> items, Path modRoot) throws IOException
+    {
+        Path dataRoot = Files.createDirectories(modRoot);
+
+        for (ModFile modfile : items)
+        {
+            modfile.save(dataRoot);
+        }
+    }
+
     public void write(Collection<ModFile> items) throws IOException
     {
         final Mod mod = modSettings.mod();
@@ -46,9 +64,6 @@ public class ModWriter
 
         Path dataRoot = Files.createDirectories(modRoot.resolve("Data"));
 
-        for (ModFile modfile : items)
-        {
-            modfile.save(dataRoot);
-        }
+        write(items, dataRoot);
     }
 }

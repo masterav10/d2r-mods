@@ -179,7 +179,7 @@ public class InstallModApplication
                                                                    .build();
 
             ModWriter writer = new ModWriter(mws);
-            writer.write(moddedFiles);
+            writer.writeDirect(moddedFiles);
         }
     }
 
