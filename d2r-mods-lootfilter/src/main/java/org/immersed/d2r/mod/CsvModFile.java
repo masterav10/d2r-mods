@@ -37,7 +37,7 @@ public class CsvModFile implements ModFile
         {
             int size = (int) row.chars()
                                 .filter(i -> i == tab)
-                                .count();
+                                .count() + 1;
 
             final String[] rowData = new String[size];
 
@@ -47,6 +47,7 @@ public class CsvModFile implements ModFile
             for (int i = 0; i < size; i++)
             {
                 next = row.indexOf(tab, start);
+                next = next == -1 ? row.length() : next;
                 rowData[i] = row.substring(start, next);
                 start = next + 1;
             }
@@ -65,12 +66,19 @@ public class CsvModFile implements ModFile
         return rows.subList(1, rows.size());
     }
 
-    public int getRowCount()
+    public String[] getRow(int index)
     {
-        return getRows().size();
+        return this.rows.get(index);
     }
 
-    public String getValueAt(String column, int row)
+    public void setValueAt(String column, int index, String value)
+    {
+        int columnIndex = getColumnIndex(column);
+        String[] row = getRow(index);
+        row[columnIndex] = value;
+    }
+
+    public int getColumnIndex(String columnHeader)
     {
         String[] headers = getHeaders();
 
@@ -78,13 +86,24 @@ public class CsvModFile implements ModFile
         {
             String header = headers[i];
 
-            if (header.equalsIgnoreCase(column))
+            if (header.equalsIgnoreCase(columnHeader))
             {
-                return getRows().get(row)[i];
+                return i;
             }
         }
 
-        return "";
+        return -1;
+    }
+
+    public int getRowCount()
+    {
+        return getRows().size();
+    }
+
+    public String getValueAt(String column, int row)
+    {
+        String[] rowContent = getRows().get(row);
+        return rowContent[getColumnIndex(column)];
     }
 
     @Override

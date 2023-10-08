@@ -12,4 +12,6 @@ dependencies {
     api "com.fasterxml.jackson.core:jackson-databind"
     
     implementation("com.google.guava:guava:31.1-jre")
+    
+    testImplementation("org.assertj:assertj-core:3.24.2")
 }
